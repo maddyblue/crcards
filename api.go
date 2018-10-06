@@ -56,6 +56,7 @@ type EmployeeDirectory struct {
 		DisplayName   string `json:"displayName"`
 		Division      string `json:"division"`
 		FirstName     string `json:"firstName"`
+		Gender        string `json:"gender"`
 		ID            string `json:"id"`
 		JobTitle      string `json:"jobTitle"`
 		LastName      string `json:"lastName"`
