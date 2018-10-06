@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "postcss-cli": "^6.0.0",
+    "purgecss": "^1.1.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
@@ -15,6 +16,7 @@
   "scripts": {
     "build:css": "postcss src/styles/index.css -o src/index.css",
     "watch:css": "postcss src/styles/index.css -o src/index.css -w",
+    "purge:css": "purgecss --css src/index.css --content src/**/*.js -o src",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

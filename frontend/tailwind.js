@@ -43,12 +43,6 @@ View the full documentation at https://tailwindcss.com.
 */
 
 let colors = {
-	black: '#22292f',
-	red: '#e3342f',
-	'blue-dark': '#2779bd',
-	blue: '#3490dc',
-	white: '#ffffff',
-	/*
 	transparent: 'transparent',
 
 	black: '#22292f',
@@ -132,7 +126,6 @@ let colors = {
 	'pink-light': '#fa7ea8',
 	'pink-lighter': '#ffbbca',
 	'pink-lightest': '#ffebef',
-*/
 };
 
 module.exports = {

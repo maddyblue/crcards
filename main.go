@@ -18,6 +18,8 @@ import (
 	"golang.org/x/oauth2/google"
 )
 
+//go:generate yarn --cwd frontend build:css
+//go:generate yarn --cwd frontend purge:css
 //go:generate yarn --cwd frontend build
 //go:generate esc -o static.go -prefix frontend/build -ignore \.map frontend/build
 
