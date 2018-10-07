@@ -46,7 +46,8 @@ class App extends Component {
 			tmp.src = next[i].photoUrl;
 		}
 		let emps = this.state.employees.filter(
-			v => v.gender === emp.gender && v.id !== emp.id
+			v =>
+				!v.gender || !emp.gender || (v.gender === emp.gender && v.id !== emp.id)
 		);
 		shuffle(emps);
 		emps = emps.slice(0, 3);
