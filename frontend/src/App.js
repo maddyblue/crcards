@@ -104,14 +104,14 @@ class App extends Component {
 		return (
 			<div className="container mx-auto p-2 max-w-md font-sans">
 				<div>
-					<div className="inline-block align-middle">
+					<div className="inline-block align-middle mr-2">
 						<img
 							className="w-150px h-150px"
 							src={emp.photoUrl}
 							alt={emp.displayName}
 						/>
 					</div>
-					<div className="inline-block align-middle mx-2">
+					<div className="inline-block align-middle">
 						{emp.department}
 						<br />
 						{emp.jobTitle}
