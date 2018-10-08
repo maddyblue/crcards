@@ -90,7 +90,9 @@ class App extends Component {
 			const disabled = this.state.disabled[v.id] === true;
 			return (
 				<button
-					className={'block btn btn-blue' + (disabled ? ' btn-disable' : '')}
+					className={
+						'text-2xl block btn btn-blue' + (disabled ? ' btn-disable' : '')
+					}
 					key={v.id}
 					disabled={disabled}
 					onClick={() => {
@@ -102,7 +104,7 @@ class App extends Component {
 			);
 		});
 		return (
-			<div className="container mx-auto p-2 max-w-md font-sans">
+			<div className="container mx-auto p-2 max-w-md font-sans text-xl">
 				<div>
 					<div className="inline-block align-middle mr-2">
 						<img
