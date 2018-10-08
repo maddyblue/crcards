@@ -137,6 +137,9 @@ class App extends Component {
 				</div>
 				<div className="border-t border-grey py-2 my-8">
 					CockroachLabs employee flashcard directory for learning names.
+					<a href="https://github.com/mjibson/crcards" className="block my-2">
+						github.com/mjibson/crcards
+					</a>
 				</div>
 			</div>
 		);
