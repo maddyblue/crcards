@@ -37,6 +37,7 @@ class App extends Component {
 					v => !this.state.teamFilter || this.state.teamFilter === v.department
 				)
 			);
+			this.setState({ total: next.length });
 		}
 		const emp = next[0];
 		next = next.slice(1);
@@ -119,6 +120,10 @@ class App extends Component {
 					</div>
 				</div>
 				<div>{buttons}</div>
+				<div className="my-4">
+					Completed: {this.state.total - this.state.next.length - 1} /{' '}
+					{this.state.total}
+				</div>
 				<div className="my-8">
 					Filter by department:{' '}
 					<select onChange={this.filterTeam}>
