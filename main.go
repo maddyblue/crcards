@@ -29,8 +29,8 @@ type Specification struct {
 
 	// Let's Encrypt domain name to use. Enables HTTPS on :443 and HTTP on :80. Ignores Addr.
 	Autocert string
-	// CockroachDB connection string for autocert db cache.
-	CockroachDB string
+	// DirCache connection string for autocert db cache.
+	DirCache string
 
 	// BambooHR API key and domain.
 	APIKey       string
@@ -107,14 +107,10 @@ func main() {
 	}
 
 	if spec.Autocert != "" {
-		dbcache, err := NewDBCache(spec.CockroachDB)
-		if err != nil {
-			log.Fatal(err)
-		}
 		m := autocert.Manager{
 			Prompt:     autocert.AcceptTOS,
 			HostPolicy: autocert.HostWhitelist(spec.Autocert),
-			Cache:      dbcache,
+			Cache:      autocert.DirCache(spec.DirCache),
 		}
 		tlsConfig := &tls.Config{GetCertificate: m.GetCertificate}
 		go func() {
