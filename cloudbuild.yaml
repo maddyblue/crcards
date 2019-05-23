@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build',
+          '-t', 'gcr.io/$PROJECT_ID/cockroachlabs/directory:$BRANCH_NAME',
+          '-t', 'gcr.io/$PROJECT_ID/cockroachlabs/directory:$SHORT_SHA',
+          '.'
+  ]
+images:
+- 'gcr.io/$PROJECT_ID/cockroachlabs/directory:$BRANCH_NAME'
+- 'gcr.io/$PROJECT_ID/cockroachlabs/directory:$SHORT_SHA'

@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: directory
+  name: directory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: directory
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: directory
+    spec:
+      containers:
+        - image: gcr.io/cockroach-dev-inf/cockroachlabs/directory:master
+          imagePullPolicy: Always
+          name: directory
+          env:
+          - name: CARDS_ADDR
+            value: ":80"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+          envFrom:
+            - secretRef:
+                name: directory-env-vars
+          resources:
+            # The requested amount is used to place the pod on a
+            # particular machine.
+            #
+            # EDITME: These values are often determined empirically.
+            requests:
+              cpu: "50m"
+              memory: "32Mi"
+            # These are hard limits that will result in the termination
+            # of the container.
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    beta.cloud.google.com/backend-config: '{"default":"crdb-dev-iap-config"}'
+  labels:
+    app: directory
+  name: directory
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: http
+  selector:
+    app: directory
+  type: NodePort

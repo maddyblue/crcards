@@ -1,9 +1,9 @@
 set -ex
 
-IMG=gcr.io/cockroach-shared/directory-crdb-io:latest
-
 go generate
-go build -o crcards
-docker build -t $IMG .
-docker push $IMG
-kubectl get po | grep directory | awk '{print $1}' | xargs kubectl delete po
+
+BRANCH=$(git symbolic-ref --short HEAD)
+SHA=$(git rev-parse --short HEAD)
+gcloud --project cockroach-dev-inf builds submit --substitutions=BRANCH_NAME=$BRANCH,SHORT_SHA=$SHA
+
+#kubectl get po | grep directory | awk '{print $1}' | xargs kubectl delete po
