@@ -70,6 +70,9 @@ func main() {
 	mux.HandleFunc("/api/get-employees", func(w http.ResponseWriter, r *http.Request) {
 		if spec.APIKey == "" {
 			b, _ := ioutil.ReadFile("f")
+			var ed EmployeeDirectory
+			json.Unmarshal(b, &ed)
+			b, _ = json.Marshal(ed.Employees)
 			w.Write(b)
 			return
 		}
