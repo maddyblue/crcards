@@ -54,11 +54,13 @@ class App extends Component {
 		emps = emps.slice(0, 3);
 		emps.push(emp);
 		shuffle(emps);
+		const prev = this.state.emp;
 		this.setState({
 			emp: emp,
 			emps: emps,
 			next: next,
 			disabled: {},
+			prev: prev,
 		});
 	}
 	handleClick(v) {
@@ -103,29 +105,23 @@ class App extends Component {
 				</button>
 			);
 		});
+		let prev;
+		if (this.state.prev) {
+			prev = (
+				<div>
+					Previous: <Employee emp={this.state.prev} details={true} />
+				</div>
+			);
+		}
 		return (
 			<div className="container mx-auto p-2 max-w-md font-sans text-xl">
-				<div>
-					<div className="inline-block align-middle mr-2">
-						<img
-							className="w-150px h-150px"
-							src={emp.photoUrl}
-							alt={emp.displayName}
-						/>
-					</div>
-					<div className="inline-block align-middle">
-						{emp.division}
-						<br />
-						{emp.jobTitle}
-						<br />
-						{emp.location}
-					</div>
-				</div>
+				<Employee emp={emp} />
 				<div>{buttons}</div>
 				<div className="my-4">
 					Completed: {this.state.total - this.state.next.length - 1} /{' '}
 					{this.state.total}
 				</div>
+				{prev}
 				<div className="my-8">
 					Filter by division:{' '}
 					<select onChange={this.filterTeam}>
@@ -145,5 +141,34 @@ class App extends Component {
 		);
 	}
 }
+
+const Employee = props => {
+	return (
+		<div>
+			<div className="inline-block align-middle mr-2">
+				<img
+					className="w-150px h-150px"
+					src={props.emp.photoUrl}
+					alt={props.emp.displayName}
+				/>
+			</div>
+			<div className="inline-block align-middle">
+				{props.details ? (
+					<span>
+						{props.emp.displayName}
+						<br />
+					</span>
+				) : null}
+				{props.emp.division}
+				<br />
+				{props.emp.department}
+				<br />
+				{props.emp.jobTitle}
+				<br />
+				{props.emp.location}
+			</div>
+		</div>
+	);
+};
 
 export default App;
