@@ -15,7 +15,7 @@ class App extends Component {
 				resp.json().then(data => {
 					const teams = {};
 					data.forEach(v => {
-						teams[v.department] = true;
+						teams[v.division] = true;
 					});
 					this.setState(
 						{
@@ -34,7 +34,7 @@ class App extends Component {
 		if (!next.length) {
 			next = shuffle(
 				this.state.employees.filter(
-					v => !this.state.teamFilter || this.state.teamFilter === v.department
+					v => !this.state.teamFilter || this.state.teamFilter === v.division
 				)
 			);
 			this.setState({ total: next.length });
@@ -114,7 +114,7 @@ class App extends Component {
 						/>
 					</div>
 					<div className="inline-block align-middle">
-						{emp.department}
+						{emp.division}
 						<br />
 						{emp.jobTitle}
 						<br />
@@ -127,7 +127,7 @@ class App extends Component {
 					{this.state.total}
 				</div>
 				<div className="my-8">
-					Filter by department:{' '}
+					Filter by division:{' '}
 					<select onChange={this.filterTeam}>
 						<option value="">All Employees</option>
 						{this.state.teams.map(v => (
